@@ -58,6 +58,7 @@ public class UploadPicture extends AsyncTask<Void, Long, Boolean> {
     private DropboxAPI<?> mApi;
     private String mPath;
     private File mFile;
+    private String mFolder;
 
     private long mFileLen;
     private UploadRequest mRequest;
@@ -68,7 +69,7 @@ public class UploadPicture extends AsyncTask<Void, Long, Boolean> {
 
 
     public UploadPicture(Context context, DropboxAPI<?> api, String dropboxPath,
-            File file) {
+            File file,String folder) {
         // We set the context this way so we don't accidentally leak activities
         mContext = context.getApplicationContext();
 
@@ -77,6 +78,7 @@ public class UploadPicture extends AsyncTask<Void, Long, Boolean> {
         mApi = api;
         mPath = dropboxPath;
         mFile = file;
+    mFolder = folder;
 
         mDialog = new ProgressDialog(context);
         mDialog.setMax(100);
@@ -99,7 +101,7 @@ public class UploadPicture extends AsyncTask<Void, Long, Boolean> {
             // By creating a request, we get a handle to the putFile operation,
             // so we can cancel it later if we want to
             FileInputStream fis = new FileInputStream(mFile);
-            String path = mPath+"Hiking/" + mFile.getName();
+            String path = mPath+ mFolder + "/" + mFile.getName();
             mRequest = mApi.putFileOverwriteRequest(path, fis, mFile.length(),
                     new ProgressListener() {
                 @Override

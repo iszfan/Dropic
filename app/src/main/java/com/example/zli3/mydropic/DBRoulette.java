@@ -279,7 +279,7 @@ public class DBRoulette extends ActionBarActivity
                 File file = new File(mCameraFileName);
 
                 if (uri != null) {
-                    UploadPicture upload = new UploadPicture(this, mApi, PHOTO_DIR, file);
+                    UploadPicture upload = new UploadPicture(this, mApi, PHOTO_DIR, file, mTitle.toString());
                     upload.execute();
                 }
             } else {
@@ -310,7 +310,7 @@ public class DBRoulette extends ActionBarActivity
         } else {
             mSubmit.setText("Link with Dropbox");
 //            mDisplay.setVisibility(View.GONE);
-            mImage.setImageDrawable(null);
+//            mImage.setImageDrawable(null);
         }
     }
 
