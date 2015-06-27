@@ -1,24 +1,6 @@
 package com.example.zli3.mydropic;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,9 +10,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -42,6 +33,12 @@ import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.android.AuthActivity;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
+
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class DBRoulette extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -114,16 +111,25 @@ public class DBRoulette extends ActionBarActivity
             mCameraFileName = savedInstanceState.getString("mCameraFileName");
         }
 
+
+
         // We create a new AuthSession so that we can use the Dropbox API.
         AndroidAuthSession session = buildSession();
         mApi = new DropboxAPI<AndroidAuthSession>(session);
+        mSubmit = (Button)findViewById(R.id.auth_button);
+        mPhoto = (ImageButton)findViewById(R.id.photo_button);
+        if (mApi.getSession().isLinked()) {
+            mSubmit.setVisibility(View.INVISIBLE);
+        } else {
+            mPhoto.setVisibility(View.INVISIBLE);
+        }
 
         // Basic Android widgets
 //        setContentView(R.layout.main);
 
         checkAppKeySetup();
 
-        mSubmit = (Button)findViewById(R.id.auth_button);
+
 
         mSubmit.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -137,6 +143,10 @@ public class DBRoulette extends ActionBarActivity
                     } else {
                         mApi.getSession().startOAuth2Authentication(DBRoulette.this);
                     }
+
+                    mSubmit.setVisibility(View.INVISIBLE);
+                    mPhoto.setVisibility(View.VISIBLE);
+
                 }
             }
         });
@@ -144,10 +154,10 @@ public class DBRoulette extends ActionBarActivity
 //        mDisplay = (LinearLayout)findViewById(R.id.logged_in_display);
 
         // This is where a photo is displayed
-        mImage = (ImageView)findViewById(R.id.image_view);
+//        mImage = (ImageView)findViewById(R.id.image_view);
 
 //        // This is the button to take a photo
-        mPhoto = (ImageButton)findViewById(R.id.photo_button);
+
 //
         mPhoto.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -408,14 +418,15 @@ public class DBRoulette extends ActionBarActivity
     public void onSectionAttached(int number) {
         switch (number) {
             case 1:
-                mTitle = getString(R.string.title_section1);
+                mTitle = "Home";
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
+                mTitle = "Hiking";
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+                mTitle = "Testing";
                 break;
+
         }
     }
 

@@ -2,4 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_newFolder" android:title="Create New Folder"
+        android:orderInCategory="200" app:showAsAction="never" />
+    <item android:id="@+id/action_newFriends" android:title="Invite Friends"
+        android:orderInCategory="300" app:showAsAction="never" />
 </menu>

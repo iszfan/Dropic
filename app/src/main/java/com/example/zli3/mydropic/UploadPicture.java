@@ -90,7 +90,7 @@ public class UploadPicture extends AsyncTask<Void, Long, Boolean> {
                 mRequest.abort();
             }
         });
-        mDialog.show();
+//        mDialog.show();
     }
 
     @Override
@@ -99,7 +99,7 @@ public class UploadPicture extends AsyncTask<Void, Long, Boolean> {
             // By creating a request, we get a handle to the putFile operation,
             // so we can cancel it later if we want to
             FileInputStream fis = new FileInputStream(mFile);
-            String path = mPath + mFile.getName();
+            String path = mPath+"Hiking/" + mFile.getName();
             mRequest = mApi.putFileOverwriteRequest(path, fis, mFile.length(),
                     new ProgressListener() {
                 @Override
