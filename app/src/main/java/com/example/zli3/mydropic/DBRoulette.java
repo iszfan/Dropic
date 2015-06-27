@@ -32,6 +32,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -85,7 +86,7 @@ public class DBRoulette extends ActionBarActivity
     // Android widgets
     private Button mSubmit;
     private LinearLayout mDisplay;
-    private Button mPhoto;
+    private ImageButton mPhoto;
     private Button mRoulette;
 
     private ImageView mImage;
@@ -146,36 +147,36 @@ public class DBRoulette extends ActionBarActivity
         mImage = (ImageView)findViewById(R.id.image_view);
 
 //        // This is the button to take a photo
-//        mPhoto = (Button)findViewById(R.id.photo_button);
+        mPhoto = (ImageButton)findViewById(R.id.photo_button);
 //
-//        mPhoto.setOnClickListener(new OnClickListener() {
-//            public void onClick(View v) {
-//                Intent intent = new Intent();
-//                // Picture from camera
-//                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-//
-//                // This is not the right way to do this, but for some reason, having
-//                // it store it in
-//                // MediaStore.Images.Media.EXTERNAL_CONTENT_URI isn't working right.
-//
-//                Date date = new Date();
-//                DateFormat df = new SimpleDateFormat("yyyy-MM-dd-kk-mm-ss", Locale.US);
-//
-//                String newPicFile = df.format(date) + ".jpg";
-//                String outPath = new File(Environment.getExternalStorageDirectory(), newPicFile).getPath();
-//                File outFile = new File(outPath);
-//
-//                mCameraFileName = outFile.toString();
-//                Uri outuri = Uri.fromFile(outFile);
-//                intent.putExtra(MediaStore.EXTRA_OUTPUT, outuri);
-//                Log.i(TAG, "Importing New Picture: " + mCameraFileName);
-//                try {
-//                    startActivityForResult(intent, NEW_PICTURE);
-//                } catch (ActivityNotFoundException e) {
-//                    showToast("There doesn't seem to be a camera.");
-//                }
-//            }
-//        });
+        mPhoto.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                // Picture from camera
+                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                // This is not the right way to do this, but for some reason, having
+                // it store it in
+                // MediaStore.Images.Media.EXTERNAL_CONTENT_URI isn't working right.
+
+                Date date = new Date();
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd-kk-mm-ss", Locale.US);
+
+                String newPicFile = df.format(date) + ".jpg";
+                String outPath = new File(Environment.getExternalStorageDirectory(), newPicFile).getPath();
+                File outFile = new File(outPath);
+
+                mCameraFileName = outFile.toString();
+                Uri outuri = Uri.fromFile(outFile);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, outuri);
+                Log.i(TAG, "Importing New Picture: " + mCameraFileName);
+                try {
+                    startActivityForResult(intent, NEW_PICTURE);
+                } catch (ActivityNotFoundException e) {
+                    showToast("There doesn't seem to be a camera.");
+                }
+            }
+        });
 //
 //
 //        // This is the button to take a photo
@@ -188,7 +189,7 @@ public class DBRoulette extends ActionBarActivity
 //            }
 //        });
 
-        openCamera();
+//        openCamera();
         // Display the proper UI state if logged in or not
         setLoggedIn(mApi.getSession().isLinked());
 

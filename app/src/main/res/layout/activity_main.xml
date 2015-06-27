@@ -34,19 +34,20 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/layout">
-            <Button
-                android:id="@+id/roulette_button"
-                android:text="Roulette"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                />
-            <Button
+            <!--<Button-->
+                <!--android:id="@+id/roulette_button"-->
+                <!--android:text="Roulette"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--/>-->
+            <ImageButton
                 android:id="@+id/photo_button"
                 android:text="New Photo"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/camerapic"
                 />
         </LinearLayout>
     </LinearLayout>
